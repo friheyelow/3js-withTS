@@ -7,7 +7,7 @@ import { Car } from '../vehicles/Car';
 import * as Utils from '../core/FunctionLibrary';
 import { Vehicle } from '../vehicles/Vehicle';
 import { Character } from '../characters/Character';
-// import { FollowPath } from '../characters/character_ai/FollowPath';
+import { FollowPath } from '../characters/character_ai/FollowPath';
 import { LoadingManager } from '../core/LoadingManager';
 import { IWorldEntity } from '../interfaces/IWorldEntity';
 
@@ -52,35 +52,35 @@ export class VehicleSpawnPoint implements ISpawnPoint
 					{
 						character.takeControl();
 					}
-					// else if (this.driver === 'ai')
-					// {
-					// 	if (this.firstAINode !== undefined)
-					// 	{
-					// 		let nodeFound = false;
-					// 		for (const pathName in world.paths) {
-					// 			if (world.paths.hasOwnProperty(pathName)) {
-					// 				const path = world.paths[pathName];
+					else if (this.driver === 'ai')
+					{
+						if (this.firstAINode !== undefined)
+						{
+							let nodeFound = false;
+							for (const pathName in world.paths) {
+								if (world.paths.hasOwnProperty(pathName)) {
+									const path = world.paths[pathName];
 									
-					// 				for (const nodeName in path.nodes) {
-					// 					if (Object.prototype.hasOwnProperty.call(path.nodes, nodeName)) {
-					// 						const node = path.nodes[nodeName];
+									for (const nodeName in path.nodes) {
+										if (Object.prototype.hasOwnProperty.call(path.nodes, nodeName)) {
+											const node = path.nodes[nodeName];
 											
-					// 						if (node.object.name === this.firstAINode)
-					// 						{
-					// 							character.setBehaviour(new FollowPath(node, 10));
-					// 							nodeFound = true;
-					// 						}
-					// 					}
-					// 				}
-					// 			}
-					// 		}
+											if (node.object.name === this.firstAINode)
+											{
+												character.setBehaviour(new FollowPath(node, 10));
+												nodeFound = true;
+											}
+										}
+									}
+								}
+							}
 
-					// 		if (!nodeFound)
-					// 		{
-					// 			console.error('Path node ' + this.firstAINode + 'not found.');
-					// 		}
-					// 	}
-					// }
+							if (!nodeFound)
+							{
+								console.error('Path node ' + this.firstAINode + 'not found.');
+							}
+						}
+					}
 				});
 			}
 		});
